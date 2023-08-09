@@ -1,9 +1,8 @@
-import Image from 'next/image'
-
+//localhost:3000
 export default function Home() {
   return (
     <div>
-      Hii
+      Hello there!
     </div>
   )
 }
