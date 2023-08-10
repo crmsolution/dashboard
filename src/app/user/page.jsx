@@ -95,7 +95,7 @@ const UserPage = ({ initialUserData }) => {
 
   return (
     <div>
-      <h2 className="text-2xl text-black">User List</h2>
+    <h2 className="text-2xl text-black">User List</h2>
       <div className="bg-blue-500">
         <ButtonGroup
           size="small"
@@ -110,7 +110,7 @@ const UserPage = ({ initialUserData }) => {
             </Button>
           </div>
           <div className="flex justify-center items-center">
-            <Button onClick={handleEdit}>
+            <Button>
               <AiOutlineEdit />
               Edit
             </Button>
@@ -136,12 +136,10 @@ const UserPage = ({ initialUserData }) => {
             </Button>
           </div>
           <div className="flex justify-center items-center">
-            {/* <Link href="/excelexport"> */}
             <Button onClick={handleExcelExport}>
               <AiOutlineFileExcel />
               Excel Export
             </Button>
-            {/* </Link> */}
           </div>
         </ButtonGroup>
       </div>
