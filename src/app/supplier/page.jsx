@@ -18,13 +18,14 @@ const UserPage = () => {
 
   return (
     <div>
-      <h2 className="text-2xl text-blue-500">Vendor List</h2>
+      <h2 className="text-2xl text-black">Vendor List</h2>
       <div className="bg-blue-500">
       <ButtonGroup
         size="small"
         variant="contained"
         aria-label="outlined primary button group"
-      >
+        className="gap-auto h-auto"
+        >
         <div className="flex justify-center items-center">
           <Link href="/import">
             <Button>
@@ -60,7 +61,7 @@ const UserPage = () => {
       </ButtonGroup>
       </div>
       <div className="w-full mx-auto p-0">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-white uppercase bg-purple-900 dark:bg-purple-900 dark:text-white">
               <tr>

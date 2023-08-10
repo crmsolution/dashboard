@@ -16,15 +16,70 @@ const UserPage = () => {
       .then((data) => setUserData(data));
   }, []);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handlePDFExport = () => {
+    const pdf = new jsPDF();
+
+    // Set title for the PDF
+    pdf.text("User List", 10, 10);
+
+    // Extract data from the table and format for PDF
+    const tableData = userData.map((user) => [
+      user.username,
+      user.name,
+      user.id,
+      user.phone,
+      user.email,
+      user.website,
+    ]);
+
+    // Auto-generate table using jsPDF's autoTable plugin
+    pdf.autoTable({
+      head: [["Branch Code", "Branch Name", "Status"]],
+      body: tableData,
+      startY: 20,
+    });
+
+    // Save the PDF file
+    pdf.save("user-list.pdf");
+  };
+
+  const handleExcelExport = () => {
+    const data = userData.map((user) => [
+      user.username,
+      user.name,
+      user.id,
+      user.phone,
+      user.email,
+      user.website,
+    ]);
+
+    const headers = [
+      "Branch Code",
+      "Branch Name",
+      "Status",
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "UserList");
+
+    XLSX.writeFile(wb, "user-list.xlsx");
+  };
+
   return (
     <div>
-      <h2 className="text-2xl text-blue-500">Branch List</h2>
+      <h2 className="text-2xl text-black">Branch List</h2>
       <div className="bg-blue-500">
       <ButtonGroup
         size="small"
         variant="contained"
         aria-label="outlined primary button group"
-      >
+        className="gap-auto h-auto"
+        >
         <div className="flex justify-center items-center">
           <Link href="/add">
             <Button>
@@ -58,33 +113,27 @@ const UserPage = () => {
           </Link>
         </div>
         <div className="flex justify-center items-center">
-          <Link href="/print">
-            <Button>
+            <Button onClick={handlePrint}>
             <AiOutlinePrinter />
             Print
             </Button>
-          </Link>
         </div>
         <div className="flex justify-center items-center">
-          <Link href="/pdfexport">
-            <Button>
+            <Button onClick={handlePDFExport}>
               <AiOutlineFilePdf />
               PDF Export
             </Button>
-          </Link>
         </div>
         <div className="flex justify-center items-center">
-          <Link href="/excelexport">
-            <Button>
+            <Button onClick={handleExcelExport}>
               <AiOutlineFileExcel />
               Excel Export
             </Button>
-          </Link>
         </div>
       </ButtonGroup>
       </div>
       <div className="w-full mx-auto p-0">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-white uppercase bg-purple-900 dark:bg-purple-900 dark:text-white">
               <tr>
